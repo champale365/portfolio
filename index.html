@@ -193,7 +193,9 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
 }
 @media (max-width:700px){
   .stage{height:86vh;height:86svh;min-height:480px}
-  .david{height:50%}
+  .david{height:46%}
+  .bar .tag{display:none}
+  .bar .me{white-space:nowrap}
   .bar{z-index:80;background:linear-gradient(var(--bg) 80%,transparent);padding-bottom:26px}
 }
 /* contact: split-flap board cycling name, phone, email */
@@ -215,6 +217,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
   .bar nav{gap:14px}
   .board{font-size:min(7vw,34px);box-shadow:6px 6px 0 var(--frameshadow,var(--ink))}
 }
+@media (max-width:380px){.bar{font-size:12px;letter-spacing:.03em}.bar nav{gap:10px}}
 @media (prefers-reduced-motion:reduce){.cell.tick{animation:none}}
 
 /* palette: Brown #603E1E, Pale Gold #F1D9A8, Glowing Gold #FFC34D */
@@ -615,7 +618,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
   var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var D=Math.PI/180, F=1400;
   var cards=[].slice.call(document.querySelectorAll('.orb')).map(function(el,i){
-    var c={el:el,th:+el.dataset.th*D,r:+el.dataset.r,y:+el.dataset.y,w:+el.dataset.w,
+    var c={el:el,i:i,th:+el.dataset.th*D,r:+el.dataset.r,y:+el.dataset.y,w:+el.dataset.w,
       t:i*7.3,held:false,hf:1,yaw:0,pitch:0,fx:+el.dataset.fx||0,fy:+el.dataset.fy||0,
       sa:(3+i%3*1.5)*D, sw:.16+(i%4)*.035, ba:9+(i%3)*4, bw:.21+(i%5)*.03, ph:i*1.9};
     function hold(){c.held=true; if(reduce){place(0);}} function free(){c.held=false; if(reduce){c.hf=1;place(0);}}
@@ -623,13 +626,33 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
     el.addEventListener('focusin',hold); el.addEventListener('focusout',free);
     return c;
   });
-  var W=0,H=0,k=1,kx=1,cx=0,cy=0,shift=0,ys=1,g=1;
+  var W=0,H=0,k=1,kx=1,cx=0,cy=0,shift=0,ys=1,g=1,phone=false;
   function measure(){
     W=stage.clientWidth; H=stage.clientHeight;
     var s=stage.getBoundingClientRect(), r=pic.getBoundingClientRect();
     k=Math.max(.6,Math.min(1.15,H/860));
-    if(W<=700){ g=k; cx=W/2; kx=(W/2-58)/500; shift=-96*D; var bar=stage.querySelector('.bar'), top=(bar?bar.offsetHeight:90)+30, bot=(r.top-s.top)+r.height*.1; if(bot<top+120) bot=top+120; cy=(top+bot)/2; ys=Math.max(.2,Math.min(.5,(bot-top)/2/(300*g))); }
-    else { cards.forEach(function(c){ if(c.el.dataset.pin==='mid'){ c.fx=(350+(r.left-s.left)+r.width*.64)/2; c.fy=Math.max(140,(60+(r.top-s.top))/2+4); } }); g=r.height/757; cx=(r.left-s.left)+r.width*.62; cy=(r.top-s.top)+r.height*.34; kx=Math.max(.5,Math.min(1.25*g,(W>900?(W*.6-cx-70):(W-cx-90))/470)); shift=0; ys=1; }
+    if(W<=700){
+      /* phone: no orbit. Nine tiles sit in three columns above his head, three stack in front of his face. Each tile keeps a small drift. */
+      phone=true; g=k; shift=0; ys=1;
+      var bar=stage.querySelector('.bar'), top=(bar?bar.offsetHeight:74)-8, pad=14, gap=10;
+      var hair=(r.top-s.top), zone=Math.max(120,hair-top-10);
+      var asp=function(c){ return c.el.classList.contains('sq')?1:(c.el.classList.contains('tall')?4/3:2/3); };
+      var wide=function(c){ return c.el.classList.contains('tall')?.78:1; };
+      var sideL=(r.left-s.left)+r.width+12, sideW=W-pad-sideL, side=[], grid=[];
+      cards.forEach(function(c){ var n=c.el.querySelector('.tile').getAttribute('aria-label'); ((sideW>=110&&(n==='Samsung'||n==='State Farm'||n==='Cracker Barrel'))?side:grid).push(c); });
+      var cw=(W-2*pad-2*gap)/3, cols, tallest;
+      for(var pass=0;pass<2;pass++){
+        cols=[0,0,0];
+        grid.forEach(function(c){ var j=cols.indexOf(Math.min.apply(null,cols)), w=cw*wide(c), h=w*asp(c); c.col=j; c.gy=cols[j]+h/2; c.mw=w; cols[j]+=h+gap; });
+        tallest=Math.max.apply(null,cols)-gap;
+        if(tallest>zone&&pass===0) cw*=zone/tallest; else break;
+      }
+      var left=(W-(3*cw+2*gap))/2, y0=top+Math.max(0,(zone-tallest)/2);
+      grid.forEach(function(c){ c.mx=left+c.col*(cw+gap)+cw/2; c.my=y0+c.gy; });
+      var sy0=hair+r.height*.07, room=H-sy0-14, sh=Math.min(sideW*2/3,(room-2*10)/3), sw=sh*1.5;
+      side.forEach(function(c,j){ c.mw=sw; c.mx=sideL+sideW/2+(j%2?7:-7); c.my=sy0+j*(sh+10)+sh/2; });
+    }
+    else { cards.forEach(function(c){ if(c.el.dataset.pin==='mid'){ c.fx=(350+(r.left-s.left)+r.width*.64)/2; c.fy=Math.max(140,(60+(r.top-s.top))/2+4); } }); phone=false; g=r.height/757; cx=(r.left-s.left)+r.width*.62; cy=(r.top-s.top)+r.height*.34; kx=Math.max(.5,Math.min(1.25*g,(W>900?(W*.6-cx-70):(W-cx-90))/470)); shift=0; ys=1; }
   }
   measure(); window.addEventListener('resize',measure); pic.addEventListener('load',measure);
   var yawT=0,pitchT=0,yaw=0,pitch=0,clock=0,last=null;
@@ -652,14 +675,15 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
       var p=F/(F-z);
       var hov=Math.max(1.35,236*k/(c.w*k*.68*p)); if(!reduce) c.hf+=((c.held?hov:1)-c.hf)*Math.min(1,dt*11); else if(c.held) c.hf=hov;
       var sx=cx+x*p*(x>=0||shift?kx:g), sy=cy+y*p*g, w=c.w*k*.68*p*c.hf;
-      if(c.fx&&!shift){ sx=c.fx+x*p*.04+c.yaw/D*1.5; sy=c.fy+(reduce?0:c.ba*.6*Math.sin(c.t*c.bw+c.ph*1.7))-c.pitch*40; }
-      var tilt=Math.asin(Math.sin(th))/D*-.4;
+      if(phone){ if(c.hf>1.22) c.hf=1.22; sx=c.mx+(reduce?0:3*Math.sin(c.t*c.sw+c.ph)); sy=c.my+(reduce?0:4*Math.sin(c.t*c.bw+c.ph*1.7)); w=c.mw*c.hf; }
+      if(c.fx&&!shift&&!phone){ sx=c.fx+x*p*.04+c.yaw/D*1.5; sy=c.fy+(reduce?0:c.ba*.6*Math.sin(c.t*c.bw+c.ph*1.7))-c.pitch*40; }
+      var tilt=phone?((c.i%3)-1)*1.5:Math.asin(Math.sin(th))/D*-.4;
       var far=Math.max(0,-z/c.r);
       c.el.style.width=w.toFixed(1)+'px';
       c.el.style.fontSize=(w*.06).toFixed(2)+'px';
       c.el.style.transform='translate('+sx.toFixed(1)+'px,'+sy.toFixed(1)+'px) translate(-50%,-50%) perspective(700px) rotateY('+tilt.toFixed(1)+'deg)';
-      c.el.style.zIndex=c.held?50:(z>0?10+Math.round(z/10):Math.max(1,4+Math.round(z/120)));
-      c.el.style.opacity=c.held?'1':(1-far*.12).toFixed(2);
+      c.el.style.zIndex=c.held?50:(phone?6:(z>0?10+Math.round(z/10):Math.max(1,4+Math.round(z/120))));
+      c.el.style.opacity=(c.held||phone)?'1':(1-far*.12).toFixed(2);
     });
   }
   place(0);
