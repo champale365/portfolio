@@ -143,6 +143,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
 .gallery.three{grid-template-columns:repeat(3,minmax(0,1fr))}
 .gallery.one{grid-template-columns:minmax(0,760px)}
 .gallery img{display:block;width:100%;height:auto;border:2px solid var(--frame,var(--ink))}
+.gallery img.wide{grid-column:1 / -1}
 .pager{display:flex;justify-content:space-between;gap:16px;margin-top:clamp(44px,6vw,84px);padding-top:22px;border-top:2px solid var(--frame,var(--ink))}
 .pager a{font-family:"Poppins",var(--display);font-weight:700;text-decoration:none;font-size:clamp(16px,1.8vw,22px)}
 .pager a:hover{text-decoration:underline}
@@ -544,7 +545,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
   <h1 class="headline flow">Equal. <span>Eighty years old, with a new look.</span></h1>
   <div class="hero-media"><img src="img/equal-1.jpg" alt="Equal" loading="lazy"></div>
   <div class="cols"><div class="body"><p>After 80 years, how do you say anything new about Equal? We took Equal back to basics and gave it a hipper more modern look for a new generation across social, digital and mobile. After all, life’s sweeter with Equal.</p></div><aside class="meta"><dl><dt>Scope</dt><dd>Social, digital and mobile</dd></dl></aside></div>
-  <div class="gallery "><img src="img/equal-2.jpg" alt="Equal, image 1" loading="lazy"><img src="img/equal-3.jpg" alt="Equal, image 2" loading="lazy"><img src="img/equal-4.jpg" alt="Equal, image 3" loading="lazy"><img src="img/equal-5.jpg" alt="Equal, image 4" loading="lazy"></div>
+  <div class="gallery "><img src="img/equal-2.jpg" alt="Equal, image 1" loading="lazy"><img src="img/equal-3.jpg" alt="Equal, image 2" loading="lazy"><img src="img/equal-oatmeal.webp" alt="Equal, image 3" loading="lazy"><img src="img/equal-wwl.webp" alt="Equal, image 4" loading="lazy"><img class="wide" src="img/equal-4.jpg" alt="Equal, image 5" loading="lazy"></div>
   <nav class="pager" aria-label="More work"><a href="#transunion"><small>Previous</small>TransUnion</a><a class="nx" href="#samsung-facebook"><small>Next</small>Samsung Facebook</a></nav>
 </article>
 </div>

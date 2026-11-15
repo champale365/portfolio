@@ -78,7 +78,7 @@ CASES=[
   meta=[('Role','Creative Director'),('Agency','Digitas'),('Design partner','Avenue')],films=[],gallery=['tu-4.jpg','tu-5.jpg','tu-6.jpg','tu-1.jpg','tu-2.jpg'],gclass=''),
  dict(slug='equal',key=None,name='Equal',line='Eighty years old, with a new look.',tag='Brand · Social',hero='equal-1.jpg',
   body=['After 80 years, how do you say anything new about Equal? We took Equal back to basics and gave it a hipper more modern look for a new generation across social, digital and mobile. After all, life’s sweeter with Equal.'],
-  meta=[('Scope','Social, digital and mobile')],films=[],gallery=['equal-2.jpg','equal-3.jpg','equal-4.jpg','equal-5.jpg'],gclass=''),
+  meta=[('Scope','Social, digital and mobile')],films=[],gallery=['equal-2.jpg','equal-3.jpg','equal-oatmeal.webp','equal-wwl.webp','*equal-4.jpg'],gclass=''),
  dict(slug='samsung-facebook',key=None,name='Samsung Facebook',line='From 11,000 likes to over 11 million in a year.',tag='Digital · Social',hero='sfb-1.jpg',
   body=['Samsung has one of the fastest growing pages in Facebook’s history, skyrocketing from 11,000 likes to over 11 million in a year. Working with our tech and social teams, I led the creative team that helped build the interactive guide to their Galaxy phones. It was a site within Facebook that included real-time RSS feeds of news and videos about Galaxy phones and a 3D viewer for every model plus their features. Some of the things we did have never been done before on Facebook.'],
   meta=[('Role','Creative Director'),('Agency','Razorfish')],films=[],gallery=['sfb-2.jpg','sfb-3.jpg','sfb-4.jpg'],gclass=''),
@@ -106,7 +106,7 @@ def case_html(c,i,bar):
     if c.get('link'): films+=f'<a class="cbtn mail" href="{c["link"][1]}"><span>{c["link"][0]}</span>{ARROW}</a>'
     films=f'<div class="films">{films}</div>' if films else ''
     side=f'<div class="side-media"><img src="img/{c["side"]}" alt="{c["name"]}" loading="lazy"></div>' if c.get('side') else ''
-    gal=''.join(f'<img src="img/{g}" alt="{c["name"]}, image {n+1}" loading="lazy">' for n,g in enumerate(c['gallery']))
+    gal=''.join(f'<img{" class=\"wide\"" if g.startswith("*") else ""} src="img/{g.lstrip("*")}" alt="{c["name"]}, image {n+1}" loading="lazy">' for n,g in enumerate(c['gallery']))  # a leading * makes an image span the full row
     gal=f'<div class="gallery {c["gclass"]}">{gal}</div>' if gal else ''
     return f'''<div id="v-{c["slug"]}" class="view sub" hidden>
 {bar}
