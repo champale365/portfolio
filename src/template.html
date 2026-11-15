@@ -62,6 +62,15 @@ a{color:inherit}
 .band{background:var(--ink);color:#fff;padding:clamp(28px,5vw,60px) clamp(16px,4vw,48px)}
 .clients{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px clamp(20px,4vw,56px);font-family:var(--display);font-weight:800;font-size:clamp(20px,2.6vw,32px);letter-spacing:-.01em}
 .clients li:nth-child(even){color:var(--signal)}
+/* client band: one row, drifting right to left; the list is doubled so the loop has no seam */
+.band{padding-left:0;padding-right:0;overflow:hidden}
+.clients{flex-wrap:nowrap;gap:0;width:max-content;animation:drift 70s linear infinite}
+.clients li{white-space:nowrap;padding-right:clamp(28px,4vw,56px)}
+.band:hover .clients{animation-play-state:paused}
+@keyframes drift{to{transform:translateX(-50%)}}
+@media (prefers-reduced-motion:reduce){.clients{animation:none;flex-wrap:wrap;width:auto;padding:0 clamp(16px,4vw,48px);row-gap:6px}.clients li[aria-hidden]{display:none}}
+.index .t a{color:inherit;text-decoration:none}
+.index .t a:hover,.index .t a:focus-visible{text-decoration:underline;text-underline-offset:3px}
 .rest{max-width:820px;margin:0 auto;padding:clamp(48px,8vw,104px) clamp(16px,4vw,48px) 72px}
 h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;margin:0 0 10px;color:var(--soft)}
 .index{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink)}
@@ -204,7 +213,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
 <p class="cta"><a class="cbtn mail" href="mailto:davidvshih@gmail.com"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5h18v11H3z M3 7l9 6.5L21 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span>Email me</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="cbtn li" href="https://www.linkedin.com/in/david-shih-creative/"><span class="in" aria-hidden="true">in</span><span>LinkedIn</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
 </div>
 </div>
-<div class="band"><ul class="clients" aria-label="Clients"><li>Jeep</li><li>Samsung</li><li>Sony</li><li>State Farm</li><li>KitchenAid</li></ul></div>
+<div class="band"><ul class="clients" aria-label="Clients"><li>Jeep</li><li>Samsung</li><li>Sony</li><li>State Farm</li><li>KitchenAid</li><li>Chrysler</li><li>Jim Beam</li><li>Sprint</li><li>Cracker Barrel</li><li>Coleman</li><li>TransUnion</li><li>Equal</li><li>Princeton</li><li>Carnegie Mellon</li><li aria-hidden="true">Jeep</li><li aria-hidden="true">Samsung</li><li aria-hidden="true">Sony</li><li aria-hidden="true">State Farm</li><li aria-hidden="true">KitchenAid</li><li aria-hidden="true">Chrysler</li><li aria-hidden="true">Jim Beam</li><li aria-hidden="true">Sprint</li><li aria-hidden="true">Cracker Barrel</li><li aria-hidden="true">Coleman</li><li aria-hidden="true">TransUnion</li><li aria-hidden="true">Equal</li><li aria-hidden="true">Princeton</li><li aria-hidden="true">Carnegie Mellon</li></ul></div>
 <main class="rest" id="work">
   <h2>All work</h2>
   <ol class="index">

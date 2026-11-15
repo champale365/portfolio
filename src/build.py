@@ -60,7 +60,7 @@ extra=[('DePaul University','Branding campaign','#depaul'),
  ('Coleman','Kelly Award finalist, BBDO','#coleman'),
  ('The reel','Selected commercials','#reel')]
 allrows=[(c[5],desc.get(c[0],''),'#'+SLUG[c[0]]) for c in cards]+extra
-rows='\n'.join(f'<li><span class="n">{i+1:02d}</span><span class="t">{n}</span><span class="d">{d}</span>'+(f'<a href="{h}">Open</a>' if h else '<span class="soon">Page to come</span>')+'</li>' for i,(n,d,h) in enumerate(allrows))
+rows='\n'.join(f'<li><span class="n">{i+1:02d}</span><span class="t">'+(f'<a href="{h}">{n}</a>' if h else n)+f'</span><span class="d">{d}</span>'+(f'<a href="{h}">Open</a>' if h else '<span class="soon">Page to come</span>')+'</li>' for i,(n,d,h) in enumerate(allrows))
 import sys, re
 theme=sys.argv[1] if len(sys.argv)>1 else 'gold'
 tpl=open(os.path.join(HERE,'template.html')).read()
