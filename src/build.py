@@ -1,5 +1,5 @@
 from cases import CASES, case_html, SLUG
-BAR='''<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a></nav></header>'''
+BAR='''<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a><a href="#contact">Contact</a></nav></header>'''
 import os, shutil
 HERE=os.path.dirname(os.path.abspath(__file__))
 OUT=os.path.dirname(HERE)            # repo root, which GitHub Pages serves
@@ -163,7 +163,7 @@ html=re.sub(r'<title>.*?</title>','<title>David Shih, creative leader and author
 open(os.path.join(OUT,'index.html'),'w').write(html); print('index.html',len(html)//1024,'KB, theme',theme)
 
 # Old Squarespace addresses and plain /slug/ addresses forward to the hash routes
-OLD={'about-1':'about','about':'about','brands-1':'work','resume':'resume','work':'work',
+OLD={'about-1':'about','about':'about','brands-1':'work','resume':'resume','work':'work','contact':'contact',
  'adlandgigs':'adland-gigs','depaul-university':'depaul','sony-alpha-camera':'sony','samsung-times-square':'samsung',
  'equal-rebrand':'equal','my-reel':'reel','coleman-kelly-finalist':'coleman','city-of-chicago-tech-plan':'chicago-tech-plan',
  'samsung-galaxy-facebook':'samsung-facebook','tepper-school-of-business':'tepper'}

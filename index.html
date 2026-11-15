@@ -195,6 +195,26 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
   .david{height:50%}
   .bar{z-index:80;background:linear-gradient(var(--bg) 80%,transparent);padding-bottom:26px}
 }
+/* contact: split-flap board cycling name, phone, email */
+.contact{min-height:calc(100vh - 90px);min-height:calc(100svh - 90px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(18px,3vh,34px);padding:24px clamp(12px,3vw,40px) clamp(48px,8vh,96px);text-align:center}
+.contact .headline{font-size:clamp(26px,4.4vw,60px);line-height:1.02;font-weight:700}
+.contact .what{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--navy)}
+.board{display:grid;grid-template-columns:repeat(var(--cols,20),.86em);gap:max(2px,.07em);font-family:"Poppins",var(--display);font-size:min(4.15vw,74px);font-weight:700;padding:.32em;background:var(--ink);border-radius:.16em;box-shadow:10px 10px 0 var(--frameshadow,var(--ink))}
+.cell{position:relative;height:1.5em;display:flex;align-items:center;justify-content:center;background:var(--brown,#2a2a30);color:var(--pale,#fff);border-radius:.08em;overflow:hidden;line-height:1}
+.cell::after{content:"";position:absolute;left:0;right:0;top:50%;height:max(1px,.03em);background:var(--ink);opacity:.75}
+.cell.tick{animation:tick .09s linear}
+@keyframes tick{50%{transform:scaleY(.55)}}
+.chips{display:flex;flex-wrap:wrap;justify-content:center;gap:12px 14px;font-size:clamp(13px,1.5vw,16px)}
+.chip{display:inline-flex;align-items:center;gap:12px;padding:10px 14px 10px 16px;border:2px solid var(--frame,var(--ink));border-radius:999px;background:var(--pale,#fff);color:var(--brown,var(--ink));box-shadow:4px 4px 0 var(--frameshadow,var(--ink))}
+.chip a{color:inherit;text-decoration:none}
+.chip a:hover{text-decoration:underline;text-underline-offset:3px}
+.chip button,.chip small{font:inherit;font-size:.78em;text-transform:uppercase;letter-spacing:.06em;color:inherit;opacity:.75;background:none;border:0;border-left:1px solid currentColor;padding:2px 0 2px 12px;cursor:pointer}
+.chip button:hover{opacity:1}
+@media (max-width:700px){
+  .bar nav{gap:14px}
+  .board{font-size:min(7vw,34px);box-shadow:6px 6px 0 var(--frameshadow,var(--ink))}
+}
+@media (prefers-reduced-motion:reduce){.cell.tick{animation:none}}
 
 /* palette: Brown #603E1E, Pale Gold #F1D9A8, Glowing Gold #FFC34D */
 :root{--bg:#FFC34D;--soft:#603E1E;--rule:rgba(96,62,30,.32);--navy:#603E1E;--signal:#FFC34D;--pop:#0b0b0d;--brown:#603E1E;--pale:#F1D9A8}
@@ -225,7 +245,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
 <div id="v-home" class="view">
 <div class="hero">
 <section class="stage" id="stage" aria-label="Selected projects around David Shih">
-  <header class="bar"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a></nav></header>
+  <header class="bar"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a><a href="#contact">Contact</a></nav></header>
   <div class="david"><img id="david" src="img/home/profile_edge.webp" alt="David Shih in profile at the left edge, looking right toward the projects"></div>
   <ul class="cloud">
 <li class="orb " data-th="17" data-r="400" data-y="232" data-w="168"><a class="tile" href="#samsung" aria-label="Samsung"><span class="media"><img src="img/home/samsung.jpg" alt=""></span><span class="info"><span class="nm">Samsung</span><span class="ln">The Galaxy S III launch that took over Times Square.</span><span class="tg">Campaign · Brand launch</span></span></a></li>
@@ -278,7 +298,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
 </main>
 </div>
 <div id="v-about" class="view sub" hidden>
-<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a></nav></header>
+<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a><a href="#contact">Contact</a></nav></header>
 <section class="about">
   <div class="portrait"><img src="img/home/about.jpg" alt="David Shih, smiling at the camera"></div>
   <div class="copy">
@@ -292,7 +312,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
 </section>
 </div>
 <div id="v-resume" class="view sub" hidden>
-<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a></nav></header>
+<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a><a href="#contact">Contact</a></nav></header>
 <section class="resume">
   <h1 class="headline flow">Making the ideas <span>that solve business problems.</span></h1>
   <p class="cta"><a class="cbtn mail" href="mailto:davidvshih@gmail.com"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5h18v11H3z M3 7l9 6.5L21 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span>Email me</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="cbtn li" href="https://www.linkedin.com/in/david-shih-creative/"><span class="in" aria-hidden="true">in</span><span>LinkedIn</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
@@ -323,8 +343,21 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
   </div>
 </section>
 </div>
+<div id="v-contact" class="view sub" hidden>
+<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a><a href="#contact">Contact</a></nav></header>
+<main class="contact">
+  <h1 class="headline">Now concepting. <span>All inquiries welcome.</span></h1>
+  <span class="what" id="what">Name</span>
+  <div class="board" id="board" role="img" aria-label="David Shih, 248.705.7695, davidvshih@gmail.com"></div>
+  <div class="chips">
+    <span class="chip"><a href="tel:+12487057695">248.705.7695</a><button type="button" data-copy="248.705.7695">Copy</button></span>
+    <span class="chip"><a href="mailto:davidvshih@gmail.com">davidvshih@gmail.com</a><button type="button" data-copy="davidvshih@gmail.com">Copy</button></span>
+    <span class="chip"><a href="https://www.linkedin.com/in/david-shih-creative/">LinkedIn</a><small>Open</small></span>
+  </div>
+</main>
+</div>
 <div id="v-samsung" class="view sub" hidden>
-<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a></nav></header>
+<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a><a href="#contact">Contact</a></nav></header>
 <article class="case">
   <a class="back" href="#work">← All work</a>
   <p class="kicker">Campaign · Brand launch</p>
@@ -336,7 +369,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
 </article>
 </div>
 <div id="v-jeep" class="view sub" hidden>
-<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a></nav></header>
+<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a><a href="#contact">Contact</a></nav></header>
 <article class="case">
   <a class="back" href="#work">← All work</a>
   <p class="kicker">Film · Print</p>
@@ -348,7 +381,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
 </article>
 </div>
 <div id="v-second-nature" class="view sub" hidden>
-<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a></nav></header>
+<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a><a href="#contact">Contact</a></nav></header>
 <article class="case">
   <a class="back" href="#work">← All work</a>
   <p class="kicker">Executive leadership · In-house</p>
@@ -360,7 +393,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
 </article>
 </div>
 <div id="v-state-farm" class="view sub" hidden>
-<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a></nav></header>
+<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a><a href="#contact">Contact</a></nav></header>
 <article class="case">
   <a class="back" href="#work">← All work</a>
   <p class="kicker">Campaign · Sponsorship</p>
@@ -372,7 +405,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
 </article>
 </div>
 <div id="v-adland-gigs" class="view sub" hidden>
-<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a></nav></header>
+<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a><a href="#contact">Contact</a></nav></header>
 <article class="case">
   <a class="back" href="#work">← All work</a>
   <p class="kicker">Product · AI build</p>
@@ -384,7 +417,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
 </article>
 </div>
 <div id="v-pocket-agency" class="view sub" hidden>
-<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a></nav></header>
+<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a><a href="#contact">Contact</a></nav></header>
 <article class="case">
   <a class="back" href="#work">← All work</a>
   <p class="kicker">Product · AI build</p>
@@ -396,7 +429,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
 </article>
 </div>
 <div id="v-tepper" class="view sub" hidden>
-<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a></nav></header>
+<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a><a href="#contact">Contact</a></nav></header>
 <article class="case">
   <a class="back" href="#work">← All work</a>
   <p class="kicker">Brand · Anthem film</p>
@@ -408,7 +441,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
 </article>
 </div>
 <div id="v-filter-easy" class="view sub" hidden>
-<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a></nav></header>
+<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a><a href="#contact">Contact</a></nav></header>
 <article class="case">
   <a class="back" href="#work">← All work</a>
   <p class="kicker">Brand · Identity</p>
@@ -420,7 +453,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
 </article>
 </div>
 <div id="v-cracker-barrel" class="view sub" hidden>
-<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a></nav></header>
+<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a><a href="#contact">Contact</a></nav></header>
 <article class="case">
   <a class="back" href="#work">← All work</a>
   <p class="kicker">Campaign · Relaunch</p>
@@ -432,7 +465,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
 </article>
 </div>
 <div id="v-tusk-wine" class="view sub" hidden>
-<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a></nav></header>
+<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a><a href="#contact">Contact</a></nav></header>
 <article class="case">
   <a class="back" href="#work">← All work</a>
   <p class="kicker">Design · Packaging</p>
@@ -444,7 +477,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
 </article>
 </div>
 <div id="v-sony" class="view sub" hidden>
-<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a></nav></header>
+<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a><a href="#contact">Contact</a></nav></header>
 <article class="case">
   <a class="back" href="#work">← All work</a>
   <p class="kicker">Campaign · Print</p>
@@ -456,7 +489,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
 </article>
 </div>
 <div id="v-jim-beam" class="view sub" hidden>
-<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a></nav></header>
+<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a><a href="#contact">Contact</a></nav></header>
 <article class="case">
   <a class="back" href="#work">← All work</a>
   <p class="kicker">Campaign · Print</p>
@@ -468,7 +501,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
 </article>
 </div>
 <div id="v-depaul" class="view sub" hidden>
-<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a></nav></header>
+<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a><a href="#contact">Contact</a></nav></header>
 <article class="case">
   <a class="back" href="#work">← All work</a>
   <p class="kicker">Campaign · Brand</p>
@@ -480,7 +513,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
 </article>
 </div>
 <div id="v-princeton" class="view sub" hidden>
-<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a></nav></header>
+<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a><a href="#contact">Contact</a></nav></header>
 <article class="case">
   <a class="back" href="#work">← All work</a>
   <p class="kicker">Campaign · Brand</p>
@@ -492,7 +525,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
 </article>
 </div>
 <div id="v-transunion" class="view sub" hidden>
-<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a></nav></header>
+<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a><a href="#contact">Contact</a></nav></header>
 <article class="case">
   <a class="back" href="#work">← All work</a>
   <p class="kicker">Brand · Digital</p>
@@ -504,7 +537,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
 </article>
 </div>
 <div id="v-equal" class="view sub" hidden>
-<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a></nav></header>
+<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a><a href="#contact">Contact</a></nav></header>
 <article class="case">
   <a class="back" href="#work">← All work</a>
   <p class="kicker">Brand · Social</p>
@@ -516,7 +549,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
 </article>
 </div>
 <div id="v-samsung-facebook" class="view sub" hidden>
-<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a></nav></header>
+<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a><a href="#contact">Contact</a></nav></header>
 <article class="case">
   <a class="back" href="#work">← All work</a>
   <p class="kicker">Digital · Social</p>
@@ -528,7 +561,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
 </article>
 </div>
 <div id="v-chicago-tech-plan" class="view sub" hidden>
-<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a></nav></header>
+<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a><a href="#contact">Contact</a></nav></header>
 <article class="case">
   <a class="back" href="#work">← All work</a>
   <p class="kicker">Digital · Print</p>
@@ -540,7 +573,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
 </article>
 </div>
 <div id="v-farm-to-fork" class="view sub" hidden>
-<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a></nav></header>
+<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a><a href="#contact">Contact</a></nav></header>
 <article class="case">
   <a class="back" href="#work">← All work</a>
   <p class="kicker">Brand · Launch</p>
@@ -552,7 +585,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
 </article>
 </div>
 <div id="v-coleman" class="view sub" hidden>
-<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a></nav></header>
+<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a><a href="#contact">Contact</a></nav></header>
 <article class="case">
   <a class="back" href="#work">← All work</a>
   <p class="kicker">Campaign · Print</p>
@@ -564,7 +597,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
 </article>
 </div>
 <div id="v-reel" class="view sub" hidden>
-<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a></nav></header>
+<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a><a href="#contact">Contact</a></nav></header>
 <article class="case">
   <a class="back" href="#work">← All work</a>
   <p class="kicker">Film · Broadcast</p>
@@ -648,6 +681,51 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
     } else window.scrollTo(0,0);
   }
   window.addEventListener('hashchange',show); show();
+})();
+</script>
+<script>
+/* contact board: one row of 20 flaps on wide screens, two rows of 12 on phones */
+(function(){
+  var board=document.getElementById('board'), what=document.getElementById('what'), view=document.getElementById('v-contact'); if(!board) return;
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var items=[['Name',['DAVID SHIH'],['DAVID','SHIH']],['Phone',['248.705.7695'],['248.705.7695','']],['Email',['DAVIDVSHIH@GMAIL.COM'],['DAVIDVSHIH','@GMAIL.COM']]];
+  var SET='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789.@', cells=[], cols=0, rows=0, cur=0, timer=null, cycle=null;
+  function layout(){
+    var phone=window.innerWidth<=700, c=phone?12:20, r=phone?2:1;
+    if(c===cols) return false;
+    cols=c; rows=r; board.style.setProperty('--cols',cols); board.innerHTML=''; cells=[];
+    for(var i=0;i<cols*rows;i++){ var el=document.createElement('span'); el.className='cell'; board.appendChild(el); cells.push(el); }
+    return true;
+  }
+  function pad(s){ var l=Math.floor((cols-s.length)/2), o=''; while(o.length<l) o+=' '; o+=s; while(o.length<cols) o+=' '; return o; }
+  function target(k){ var lines=items[k][rows===1?1:2], o=''; for(var r=0;r<rows;r++) o+=pad(lines[r]||''); return o; }
+  function flick(c){ c.classList.remove('tick'); void c.offsetWidth; c.classList.add('tick'); }
+  function showItem(k){
+    var t=target(k); what.textContent=items[k][0]; clearInterval(timer);
+    if(reduce){ cells.forEach(function(c,i){ c.textContent=t[i]===' '?'':t[i]; }); return; }
+    var step=0;
+    timer=setInterval(function(){
+      step++; var done=true;
+      cells.forEach(function(c,i){
+        var ch=t[i]===' '?'':t[i], settle=6+(i%cols)*1.6+Math.floor(i/cols)*4;
+        if(step>=settle){ if(c.textContent!==ch){ c.textContent=ch; flick(c); } }
+        else { done=false; c.textContent=SET[(Math.random()*SET.length)|0]; flick(c); }
+      });
+      if(done) clearInterval(timer);
+    },45);
+  }
+  function start(){ stop(); layout(); cur=0; showItem(0); cycle=setInterval(function(){ cur=(cur+1)%items.length; showItem(cur); },4200); }
+  function stop(){ clearInterval(cycle); clearInterval(timer); }
+  function sync(){ if(view.hidden) stop(); else start(); }
+  window.addEventListener('hashchange',function(){ setTimeout(sync,0); });
+  window.addEventListener('resize',function(){ if(!view.hidden&&layout()) showItem(cur); });
+  setTimeout(sync,0);
+  [].forEach.call(document.querySelectorAll('[data-copy]'),function(b){
+    b.addEventListener('click',function(){
+      function say(m){ b.textContent=m; setTimeout(function(){ b.textContent='Copy'; },1400); }
+      try{ navigator.clipboard.writeText(b.getAttribute('data-copy')).then(function(){ say('Copied'); },function(){ say('Select to copy'); }); }catch(e){ say('Select to copy'); }
+    });
+  });
 })();
 </script>
 </body>
