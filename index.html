@@ -196,6 +196,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
   .david{height:46%}
   .bar .tag{display:none}
   .bar .me{white-space:nowrap}
+  .stage{touch-action:pan-y}
   .bar{z-index:80;background:linear-gradient(var(--bg) 80%,transparent);padding-bottom:26px}
 }
 /* contact: split-flap board cycling name, phone, email */
@@ -626,28 +627,22 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
     el.addEventListener('focusin',hold); el.addEventListener('focusout',free);
     return c;
   });
-  var W=0,H=0,k=1,kx=1,cx=0,cy=0,shift=0,ys=1,g=1,phone=false;
+  var W=0,H=0,k=1,kx=1,cx=0,cy=0,shift=0,ys=1,g=1,phone=false,PCX=0,PCY=0,PRX=1,PRY=1,spin=0,fling=0,dragX=null;
   function measure(){
     W=stage.clientWidth; H=stage.clientHeight;
     var s=stage.getBoundingClientRect(), r=pic.getBoundingClientRect();
     k=Math.max(.6,Math.min(1.15,H/860));
     if(W<=700){
-      /* phone: no orbit. Small tiles scatter in a loose cloud above his head, and three float in front of his face. Each drifts on its own. */
+      /* phone: the tiles sit on a sphere above his head and the whole cloud turns. Near tiles are larger, far ones smaller and dimmer.
+         The right side of the cloud hangs lower, so tiles pass in front of his eyes. Far tiles go behind his hair. */
       phone=true; g=k; shift=0; ys=1;
-      var bar=stage.querySelector('.bar'), top=(bar?bar.offsetHeight:74)-10, pad=10;
-      var hair=(r.top-s.top), zone=Math.max(120,hair-top), bw=Math.min(W*.215,104);
-      var sideL=(r.left-s.left)+r.width+6, sideW=W-pad-sideL, front=sideW>=96;
-      /* x as a share of the width, y as a share of the space between header and hair, then size */
-      var above=[[.17,.13,1],[.42,.05,.84],[.66,.15,1.1],[.88,.06,.78],[.28,.45,.9],[.54,.42,1.16],[.80,.49,.94],[.25,.80,.86],[.63,.85,1.02],[.90,.80,.8],[.44,.82,.8],[.05,.47,.7]];
-      var beside=[[.36,.2,1.12],[.66,.52,.9],[.38,.82,1]];
-      var a=0, b=0;
-      cards.forEach(function(c){
-        var n=c.el.querySelector('.tile').getAttribute('aria-label'), sq=c.el.classList.contains('sq'), tall=c.el.classList.contains('tall'), p;
-        if(front&&b<3&&(n==='Samsung'||n==='State Farm'||n==='Cracker Barrel')){ p=beside[b++]; c.mx=sideL+p[0]*sideW; c.my=hair+p[1]*(H-hair-10); }
-        else { p=above[a++%above.length]; c.mx=p[0]*W; c.my=top+p[1]*zone; }
-        c.ms=p[2]; c.mw=bw*p[2]*(sq?.8:(tall?.64:1));
-        var half=c.mw/2+pad; c.mx=Math.max(half,Math.min(W-half,c.mx));
-        var hh=c.mw*(sq?1:(tall?4/3:2/3))/2; if(c.my-hh<top) c.my=top+hh;
+      var bar=stage.querySelector('.bar'), top=(bar?bar.offsetHeight:74)-12;
+      var hair=(r.top-s.top), zone=Math.max(140,hair-top), n=cards.length, bw=Math.min(W*.165,78);
+      PCX=W*.53; PCY=top+zone*.52; PRX=W*.5-46; PRY=zone*.4;
+      cards.forEach(function(c,i){
+        var y=1-2*(i+.5)/n, sq=c.el.classList.contains('sq'), tall=c.el.classList.contains('tall');
+        c.py=y*.92; c.pr=Math.sqrt(1-y*y); c.pa=i*2.39996;      /* golden-angle spread, so the sphere is evenly covered */
+        c.mw=bw*(sq?.82:(tall?.7:1));
       });
     }
     else { cards.forEach(function(c){ if(c.el.dataset.pin==='mid'){ c.fx=(350+(r.left-s.left)+r.width*.64)/2; c.fy=Math.max(140,(60+(r.top-s.top))/2+4); } }); phone=false; g=r.height/757; cx=(r.left-s.left)+r.width*.62; cy=(r.top-s.top)+r.height*.34; kx=Math.max(.5,Math.min(1.25*g,(W>900?(W*.6-cx-70):(W-cx-90))/470)); shift=0; ys=1; }
@@ -662,9 +657,13 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
     pitchT=((e.clientY-r.top)/r.height-.5)*.3;
   });
   stage.addEventListener('pointerleave',function(){yawT=0;pitchT=0;});
+  stage.addEventListener('pointerdown',function(e){ if(phone&&e.pointerType==='touch') dragX=e.clientX; });
+  stage.addEventListener('pointermove',function(e){ if(!phone||dragX===null||e.pointerType!=='touch') return; var dx=e.clientX-dragX; dragX=e.clientX; spin+=dx*.011; fling=Math.max(-4,Math.min(4,dx*.35)); });
+  ['pointerup','pointercancel'].forEach(function(ev){ stage.addEventListener(ev,function(){ dragX=null; }); });
   function place(dt){
     clock+=dt; yaw+=(yawT-yaw)*Math.min(1,dt*3.2); pitch+=(pitchT-pitch)*Math.min(1,dt*3.2);
     var auto=reduce?0:Math.sin(clock*.11)*3*D;
+    if(phone&&!reduce&&!cards.some(function(c){return c.held;})){ spin+=dt*(.32+fling); fling*=Math.pow(.08,dt); }
     cards.forEach(function(c){
       if(!c.held){c.t+=dt;c.yaw=yaw+auto;c.pitch=pitch;}
       var th=c.th+shift+c.yaw+(reduce?0:c.sa*Math.sin(c.t*c.sw+c.ph));
@@ -673,15 +672,23 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
       var p=F/(F-z);
       var hov=Math.max(1.35,236*k/(c.w*k*.68*p)); if(!reduce) c.hf+=((c.held?hov:1)-c.hf)*Math.min(1,dt*11); else if(c.held) c.hf=hov;
       var sx=cx+x*p*(x>=0||shift?kx:g), sy=cy+y*p*g, w=c.w*k*.68*p*c.hf;
-      if(phone){ if(c.hf>1.6) c.hf=1.6; sx=c.mx+(reduce?0:6*Math.sin(c.t*c.sw*1.3+c.ph)); sy=c.my+(reduce?0:8*Math.sin(c.t*c.bw*1.2+c.ph*1.7)); w=c.mw*c.hf; }
+      var zz=0, ux=0;
+      if(phone){
+        var A=c.pa+spin, uz=c.pr*Math.cos(A), wob=reduce?0:.24*Math.sin(clock*.21);
+        ux=c.pr*Math.sin(A);
+        var y2=c.py*Math.cos(wob)-uz*Math.sin(wob); zz=c.py*Math.sin(wob)+uz*Math.cos(wob);
+        var pp=1/(1-zz*.34);
+        if(c.hf>1.9) c.hf=1.9;
+        sx=PCX+ux*PRX*pp; sy=PCY+y2*PRY*pp+Math.max(0,ux)*PRX*.55+(reduce?0:3*Math.sin(c.t*c.bw+c.ph)); w=c.mw*pp*c.hf;
+      }
       if(c.fx&&!shift&&!phone){ sx=c.fx+x*p*.04+c.yaw/D*1.5; sy=c.fy+(reduce?0:c.ba*.6*Math.sin(c.t*c.bw+c.ph*1.7))-c.pitch*40; }
-      var tilt=phone?((c.i*5%7)-3)*1.1:Math.asin(Math.sin(th))/D*-.4;
+      var tilt=phone?ux*-26:Math.asin(Math.sin(th))/D*-.4;
       var far=Math.max(0,-z/c.r);
       c.el.style.width=w.toFixed(1)+'px';
       c.el.style.fontSize=(w*.06).toFixed(2)+'px';
       c.el.style.transform='translate('+sx.toFixed(1)+'px,'+sy.toFixed(1)+'px) translate(-50%,-50%) perspective(700px) rotateY('+tilt.toFixed(1)+'deg)';
-      c.el.style.zIndex=c.held?50:(phone?Math.round(c.ms*10):(z>0?10+Math.round(z/10):Math.max(1,4+Math.round(z/120))));
-      c.el.style.opacity=(c.held||phone)?'1':(1-far*.12).toFixed(2);
+      c.el.style.zIndex=c.held?50:(phone?(zz>0?10+Math.round(zz*20):1+Math.round((zz+1)*3)):(z>0?10+Math.round(z/10):Math.max(1,4+Math.round(z/120))));
+      c.el.style.opacity=c.held?'1':(phone?(.74+.26*(zz+1)/2).toFixed(2):(1-far*.12).toFixed(2));
     });
   }
   place(0);
