@@ -663,7 +663,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
   function place(dt){
     clock+=dt; yaw+=(yawT-yaw)*Math.min(1,dt*3.2); pitch+=(pitchT-pitch)*Math.min(1,dt*3.2);
     var auto=reduce?0:Math.sin(clock*.11)*3*D;
-    if(phone&&!reduce&&!cards.some(function(c){return c.held;})){ spin+=dt*(.32+fling); fling*=Math.pow(.08,dt); }
+    if(phone&&!reduce&&!cards.some(function(c){return c.held;})){ spin+=dt*(.24+fling); fling*=Math.pow(.08,dt); }
     cards.forEach(function(c){
       if(!c.held){c.t+=dt;c.yaw=yaw+auto;c.pitch=pitch;}
       var th=c.th+shift+c.yaw+(reduce?0:c.sa*Math.sin(c.t*c.sw+c.ph));
@@ -674,12 +674,12 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
       var sx=cx+x*p*(x>=0||shift?kx:g), sy=cy+y*p*g, w=c.w*k*.68*p*c.hf;
       var zz=0, ux=0;
       if(phone){
-        var A=c.pa+spin, uz=c.pr*Math.cos(A), wob=reduce?0:.24*Math.sin(clock*.21);
+        var A=c.pa+spin, uz=c.pr*Math.cos(A), wob=reduce?0:.24*Math.sin(clock*.158);
         ux=c.pr*Math.sin(A);
         var y2=c.py*Math.cos(wob)-uz*Math.sin(wob); zz=c.py*Math.sin(wob)+uz*Math.cos(wob);
         var pp=1/(1-zz*.34);
         if(c.hf>1.9) c.hf=1.9;
-        sx=PCX+ux*PRX*pp; sy=PCY+y2*PRY*pp+Math.max(0,ux)*PRX*.55+(reduce?0:3*Math.sin(c.t*c.bw+c.ph)); w=c.mw*pp*c.hf;
+        sx=PCX+ux*PRX*pp; sy=PCY+y2*PRY*pp+Math.max(0,ux)*PRX*.55+(reduce?0:3*Math.sin(c.t*c.bw*.75+c.ph)); w=c.mw*pp*c.hf;
       }
       if(c.fx&&!shift&&!phone){ sx=c.fx+x*p*.04+c.yaw/D*1.5; sy=c.fy+(reduce?0:c.ba*.6*Math.sin(c.t*c.bw+c.ph*1.7))-c.pitch*40; }
       var tilt=phone?ux*-26:Math.asin(Math.sin(th))/D*-.4;
