@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>David Shih portfolio prototype</title>
+<meta name="description" content="David Shih. Executive Creative Director and author. Selected work for Samsung, Jeep, State Farm, Sony, and others.">
+<meta property="og:title" content="David Shih, creative leader and author">
+<meta property="og:description" content="Executive Creative Director turning business problems into ideas, brands, and teams.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.davidvshih.com/">
+<meta property="og:image" content="https://www.davidvshih.com/img/home/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=IBM+Plex+Mono:wght@400;500&family=Poppins:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* layout: one-screen white hero, David in profile against the left edge and sharp to the fold, tiles on a half shell in front of and behind his head, black band below */
+  --bg:#ffffff; --ink:#0b0b0d; --soft:#6b6f80; --rule:#e3e4ea; --accent:#1c2bc9; --navy:#14254f; --signal:#ffd23f; --pop:#1c2bc9;
+  --display:"Bricolage Grotesque","Arial Narrow",Arial,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--bg);color:var(--ink);font-family:var(--mono);font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:4px}
+.hero{position:relative;height:100%;min-height:520px}
+.pitch{position:absolute;right:clamp(20px,4vw,64px);top:50%;transform:translateY(-50%);z-index:55;width:min(34vw,540px)}
+.proof{font-family:"Poppins",var(--display);font-weight:500;font-size:clamp(14px,1.2vw,18px);line-height:1.45;max-width:34ch;margin:1.1em 0 0;text-wrap:balance}
+.pitch .cta{margin:1.3em 0 0 !important}
+.headline{margin:0;font-family:"Poppins",var(--display);font-weight:700;font-size:clamp(22px,2.65vw,41px);line-height:1;letter-spacing:-.005em;text-transform:uppercase;text-wrap:balance}
+.headline span{display:block;color:var(--navy);margin-top:0}
+.who{display:flex;flex-direction:column;gap:2px}
+.tag{font-size:11.5px;letter-spacing:.02em;text-transform:none;color:var(--soft)}
+.stage{position:relative;height:100%;min-height:520px;overflow:hidden;background:var(--bg)}
+.bar{position:absolute;left:0;right:0;top:0;z-index:60;display:flex;justify-content:space-between;align-items:flex-start;gap:16px;padding:20px clamp(16px,3vw,40px);font-size:13px;letter-spacing:.05em;text-transform:uppercase}
+.bar nav{display:flex;gap:22px}
+.bar a{text-decoration:none}
+.bar a:hover{color:var(--accent)}
+.me{font-family:var(--display);font-weight:800;font-size:20px;letter-spacing:-.01em;text-transform:none}
+.david{position:absolute;left:0;bottom:0;height:74%;z-index:5;pointer-events:none}
+.david img{display:block;height:100%;width:auto}
+.cloud{list-style:none;margin:0;padding:0;position:absolute;inset:0}
+.orb{position:absolute;left:0;top:0;width:150px;font-size:9px;transform:translate(-999px,-999px)}
+.tile{position:relative;display:block;border-radius:6px;overflow:hidden;background:var(--ink);box-shadow:5px 12px 18px rgba(11,11,13,.34),1px 2px 4px rgba(11,11,13,.22);transition:box-shadow .28s ease;cursor:pointer;text-decoration:none;color:#fff}
+.media{position:relative;display:block;aspect-ratio:3/2;background:var(--ink)}
+.sq .media{aspect-ratio:1/1}
+.tall .media{aspect-ratio:3/4}
+.media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.media img.scroller{object-position:50% 0;animation:pagescroll 18s ease-in-out infinite alternate}
+@keyframes pagescroll{0%,10%{object-position:50% 0}90%,100%{object-position:50% 100%}}
+@media (prefers-reduced-motion:reduce){.media img.scroller{animation:none}}
+.mono{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:var(--signal);color:var(--ink);font-family:var(--display);font-weight:800;font-size:5em;letter-spacing:-.03em}
+.info{display:block;max-height:0;overflow:hidden;padding:0 1em;transition:max-height .28s ease,padding .28s ease}
+.info .nm{display:block;font-family:"Poppins",var(--display);font-weight:700;font-size:1.2em;line-height:1.15}
+.info .ln{display:block;font-family:"Poppins",var(--display);font-weight:400;font-size:.95em;line-height:1.35;margin-top:.35em;color:rgba(255,255,255,.86)}
+.info .tg{display:block;font-family:"Poppins",var(--display);font-weight:700;font-size:.86em;letter-spacing:.07em;text-transform:uppercase;margin-top:.85em;padding-top:.7em;border-top:1px solid rgba(255,255,255,.28);color:#fff}
+.orb:hover .info,.orb:focus-within .info{max-height:14em;padding:.9em 1em 1em}
+.orb:hover .tile,.orb:focus-within .tile{box-shadow:8px 18px 28px rgba(11,11,13,.4),1px 2px 4px rgba(11,11,13,.2)}
+.band{background:var(--ink);color:#fff;padding:clamp(28px,5vw,60px) clamp(16px,4vw,48px)}
+.clients{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px clamp(20px,4vw,56px);font-family:var(--display);font-weight:800;font-size:clamp(20px,2.6vw,32px);letter-spacing:-.01em}
+.clients li:nth-child(even){color:var(--signal)}
+.rest{max-width:820px;margin:0 auto;padding:clamp(48px,8vw,104px) clamp(16px,4vw,48px) 72px}
+h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;margin:0 0 10px;color:var(--soft)}
+.index{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink)}
+.index li{display:grid;grid-template-columns:36px minmax(160px,260px) 1fr auto;gap:14px;align-items:baseline;padding:12px 0;border-bottom:1px solid var(--rule)}
+.index .n{font-size:12px;color:var(--soft);font-variant-numeric:tabular-nums}
+.index .t{font-family:var(--display);font-weight:800;font-size:18px}
+.index .soon{color:var(--soft)}
+.index .d{color:var(--soft);font-size:13px}
+@media (max-width:700px){.index li{grid-template-columns:30px 1fr auto}.index .d{grid-column:2 / 4;grid-row:2}}
+.note{margin:26px 0 0;color:var(--soft);max-width:65ch}
+
+.view{display:block}
+.view[hidden]{display:none}
+#v-home{height:100%}
+.bar.static{position:static}
+.bar a.me{text-decoration:none;color:inherit}
+.headline.flow{max-width:17ch;font-size:clamp(28px,4.4vw,64px)}
+.sub p{font-family:"Poppins",var(--display);font-size:clamp(15px,1.25vw,18px);line-height:1.6;max-width:60ch;margin:0 0 1.1em}
+.about{display:grid;grid-template-columns:minmax(260px,38%) 1fr;gap:clamp(24px,5vw,80px);min-height:calc(100vh - 90px);align-items:center;padding:clamp(16px,3vw,40px) clamp(16px,4vw,64px) clamp(40px,7vw,96px)}
+.about .portrait{line-height:0;display:flex;justify-content:flex-end}
+.about .portrait img{display:block;width:100%;max-width:400px;height:auto;border:3px solid var(--frame,var(--ink));box-shadow:12px 12px 0 var(--frameshadow,var(--ink));transform:rotate(-2deg)}
+.about .copy{align-self:center}
+.about .lede{font-weight:500;margin-top:1.4em}
+.about .aside{border-left:4px solid var(--ink);padding-left:16px;font-weight:500}
+.about .aside b{color:var(--navy);font-weight:700}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:1.8em !important}
+.cbtn{display:inline-flex;align-items:center;gap:.6em;font-family:"Poppins",var(--display);font-weight:700;font-size:14px;letter-spacing:.05em;text-transform:uppercase;text-decoration:none;padding:12px 16px 12px 14px;border:2.5px solid var(--ink);border-radius:999px;transition:transform .16s ease,box-shadow .16s ease}
+.cbtn svg{width:18px;height:18px;flex:none}
+.cbtn .go{transition:transform .2s ease}
+.cbtn.mail{background:#fff;color:var(--ink);box-shadow:5px 5px 0 var(--ink)}
+.cbtn.li{background:var(--ink);color:#fff;box-shadow:5px 5px 0 var(--pop)}
+.cbtn .in{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:4px;background:#fff;color:var(--ink);font-size:12px;letter-spacing:0;text-transform:none;font-weight:700}
+.cbtn:hover,.cbtn:focus-visible{transform:translate(3px,3px)}
+.cbtn.mail:hover,.cbtn.mail:focus-visible{box-shadow:2px 2px 0 var(--ink)}
+.cbtn.li:hover,.cbtn.li:focus-visible{box-shadow:2px 2px 0 var(--pop)}
+.cbtn:hover .go,.cbtn:focus-visible .go{transform:translate(3px,-3px)}
+.cta{gap:16px}
+.btn{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;font-family:"Poppins",var(--display);font-weight:700;font-size:14px;letter-spacing:.04em;text-transform:uppercase;padding:13px 20px;border:2px solid var(--ink)}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn:hover{background:#fff;color:var(--ink);border-color:#fff}
+.resume{max-width:1180px;margin:0 auto;padding:clamp(24px,5vw,64px) clamp(16px,4vw,48px) clamp(48px,8vw,96px)}
+.resume .cols{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:clamp(24px,5vw,72px);margin-top:clamp(24px,4vw,48px)}
+.resume h2{font-family:"Poppins",var(--display);font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);margin:0 0 10px;padding-bottom:8px;border-bottom:2px solid var(--ink)}
+.resume .facts h2:not(:first-child){margin-top:36px}
+.jobs{list-style:none;margin:0;padding:0}
+.jobs li{display:grid;grid-template-columns:118px 1fr;column-gap:16px;padding:12px 0;border-bottom:1px solid var(--rule)}
+.jobs .yr{font-size:12px;grid-row:1 / 3;padding-top:3px;color:var(--soft);font-variant-numeric:tabular-nums}
+.jobs .co{font-family:"Poppins",var(--display);font-weight:700;font-size:17px}
+.jobs .ro{font-family:"Poppins",var(--display);font-size:14px;line-height:1.45}
+.resume .plain{font-size:15px;margin:0}
+@keyframes rise{from{transform:translateY(90px)}to{transform:none}}
+.case{max-width:1180px;margin:0 auto;padding:clamp(8px,2vw,24px) clamp(16px,4vw,48px) clamp(56px,8vw,110px)}
+.back{display:inline-block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;margin:0 0 22px;color:var(--soft)}
+.back:hover{text-decoration:underline}
+.kicker{font-family:"Poppins",var(--display) !important;font-weight:700;font-size:13px !important;letter-spacing:.08em;text-transform:uppercase;margin:0 0 10px !important;color:var(--soft)}
+.case .headline.flow{max-width:21ch}
+.hero-media{margin:clamp(26px,4vw,46px) 0 0;line-height:0}
+.hero-media img{display:block;width:100%;height:auto;border:3px solid var(--frame,var(--ink));box-shadow:12px 12px 0 var(--frameshadow,var(--ink))}
+.case .cols{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);gap:clamp(24px,5vw,72px);margin-top:clamp(38px,5vw,66px)}
+.case .body p{font-size:clamp(16px,1.35vw,19px);max-width:62ch}
+.case .body h3{font-family:"Poppins",var(--display);font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin:2.2em 0 .7em;padding-top:1.1em;border-top:2px solid var(--frame,var(--ink));max-width:62ch}
+.meta dl{margin:0}
+.meta dt{font-family:"Poppins",var(--display);font-weight:700;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--soft);margin-top:18px}
+.meta dt:first-child{margin-top:4px}
+.meta dd{margin:4px 0 0;font-family:"Poppins",var(--display);font-size:15px;line-height:1.45}
+.films{display:flex;flex-direction:column;align-items:flex-start;gap:14px;margin-top:26px}
+.side-media{margin-top:28px;line-height:0}
+.side-media img{display:block;width:100%;max-width:380px;height:auto;border:3px solid var(--frame,var(--ink));box-shadow:10px 10px 0 var(--frameshadow,var(--ink))}
+.gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,2vw,26px);margin-top:clamp(38px,5vw,66px);align-items:start}
+.gallery.three{grid-template-columns:repeat(3,minmax(0,1fr))}
+.gallery.one{grid-template-columns:minmax(0,760px)}
+.gallery img{display:block;width:100%;height:auto;border:2px solid var(--frame,var(--ink))}
+.pager{display:flex;justify-content:space-between;gap:16px;margin-top:clamp(44px,6vw,84px);padding-top:22px;border-top:2px solid var(--frame,var(--ink))}
+.pager a{font-family:"Poppins",var(--display);font-weight:700;text-decoration:none;font-size:clamp(16px,1.8vw,22px)}
+.pager a:hover{text-decoration:underline}
+.pager .nx{text-align:right}
+.pager small{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);font-weight:400}
+.case>*{animation:rise .7s cubic-bezier(.16,.8,.24,1) both}
+.case>*:nth-child(3){animation-delay:.06s}
+.case>*:nth-child(4){animation-delay:.14s}
+.case>*:nth-child(5){animation-delay:.22s}
+.case>*:nth-child(6){animation-delay:.3s}
+.case>*:nth-child(n+7){animation-delay:.36s}
+@media (prefers-reduced-motion:reduce){.case>*{animation:none}}
+@media (max-width:820px){.case .cols{grid-template-columns:1fr}.gallery,.gallery.three{grid-template-columns:1fr}}
+
+#v-resume .headline,#v-resume .cta,#v-resume .summary,#v-resume .facts h2,#v-resume .facts .plain,#v-resume .jobs li{animation:rise .75s cubic-bezier(.16,.8,.24,1) both}
+#v-resume .cta{animation-delay:.1s}
+#v-resume .summary{animation-delay:.2s}
+#v-resume .facts h2:first-child{animation-delay:.28s}
+#v-resume .jobs li:nth-child(1){animation-delay:.34s}
+#v-resume .jobs li:nth-child(2){animation-delay:.40s}
+#v-resume .jobs li:nth-child(3){animation-delay:.46s}
+#v-resume .jobs li:nth-child(4){animation-delay:.52s}
+#v-resume .jobs li:nth-child(5){animation-delay:.58s}
+#v-resume .jobs li:nth-child(6){animation-delay:.64s}
+#v-resume .jobs li:nth-child(7){animation-delay:.70s}
+#v-resume .jobs li:nth-child(8){animation-delay:.76s}
+#v-resume .jobs li:nth-child(9){animation-delay:.82s}
+#v-resume .facts h2:not(:first-child),#v-resume .facts .plain{animation-delay:.9s}
+@media (prefers-reduced-motion:reduce){#v-resume .headline,#v-resume .cta,#v-resume .summary,#v-resume .facts h2,#v-resume .facts .plain,#v-resume .jobs li{animation:none}}
+@media (max-width:820px){
+  .about{grid-template-columns:1fr;min-height:0}
+  .about .copy{order:1}
+  .about .portrait{order:2}
+  .about .portrait{justify-content:flex-start;margin-top:28px}
+  .about .portrait img{max-width:70%}
+  .resume .cols{grid-template-columns:1fr}
+}
+@media (max-width:900px){
+  .hero{height:auto}
+  .stage{height:100vh;height:100svh}
+  .pitch{position:static;transform:none;width:auto;background:var(--ink);color:#fff;padding:28px clamp(16px,4vw,48px) 4px}
+  .pitch .headline{font-size:clamp(28px,7vw,44px)}
+  .pitch .headline span{color:var(--signal)}
+  .pitch .cbtn{border-color:#fff}
+  .pitch .cbtn.mail{box-shadow:5px 5px 0 var(--signal)}
+  .pitch .cbtn.li{box-shadow:5px 5px 0 #fff}
+}
+@media (max-width:700px){
+  .stage{height:86vh;height:86svh;min-height:480px}
+  .david{height:50%}
+  .bar{z-index:80;background:linear-gradient(var(--bg) 80%,transparent);padding-bottom:26px}
+}
+</style>
+</head>
+<body>
+<div id="v-home" class="view">
+<div class="hero">
+<section class="stage" id="stage" aria-label="Selected projects around David Shih">
+  <header class="bar"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a></nav></header>
+  <div class="david"><img id="david" src="{{HEAD}}" alt="David Shih in profile at the left edge, looking right toward the projects"></div>
+  <ul class="cloud">
+{{ORBS}}
+  </ul>
+</section>
+<div class="pitch">
+<h1 class="headline">Creative leader and author. <span>Occasionally breaking, mostly building things with AI.</span></h1>
+<p class="proof">Executive Creative Director turning business problems into ideas, brands, and teams.</p>
+<p class="cta"><a class="cbtn mail" href="mailto:davidvshih@gmail.com"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5h18v11H3z M3 7l9 6.5L21 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span>Email me</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="cbtn li" href="https://www.linkedin.com/in/david-shih-creative/"><span class="in" aria-hidden="true">in</span><span>LinkedIn</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+</div>
+</div>
+<div class="band"><ul class="clients" aria-label="Clients"><li>Jeep</li><li>Samsung</li><li>Sony</li><li>State Farm</li><li>KitchenAid</li></ul></div>
+<main class="rest" id="work">
+  <h2>All work</h2>
+  <ol class="index">
+{{ROWS}}
+  </ol>
+  
+</main>
+</div>
+<div id="v-about" class="view sub" hidden>
+<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a></nav></header>
+<section class="about">
+  <div class="portrait"><img src="{{HEAD2}}" alt="David Shih, smiling at the camera"></div>
+  <div class="copy">
+    <h1 class="headline flow">Executive creative and brand leader, writer, <span>and Oxford comma loyalist.</span></h1>
+    <p class="lede">Executive Creative Director turning business problems into ideas, brands, and teams. Based in Chicago.</p>
+    <p>He partners with leadership teams to turn business strategy into creative that drives growth, clarity, and differentiation. His background spans PE-backed growth companies, global brands, and top-tier agencies, with experience leading brand transformation, building scalable creative teams, and guiding complex, high-stakes initiatives.</p>
+    <p>He has led work for brands including Samsung, Jeep, Sony, State Farm, and KitchenAid, and believes creativity is most powerful when it earns its place in the business.</p>
+    <p class="aside">In addition to writing about himself in the third person, he once told Michael Bay that Transformers would absolutely make a great movie. <b>Sorry about that.</b></p>
+    <p class="cta"><a class="cbtn mail" href="mailto:davidvshih@gmail.com"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5h18v11H3z M3 7l9 6.5L21 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span>Email me</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="cbtn li" href="https://www.linkedin.com/in/david-shih-creative/"><span class="in" aria-hidden="true">in</span><span>LinkedIn</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="btn ghost" href="#resume">See the resume</a></p>
+  </div>
+</section>
+</div>
+<div id="v-resume" class="view sub" hidden>
+<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Purveyor of fine memes since the early aughts.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a></nav></header>
+<section class="resume">
+  <h1 class="headline flow">Making the ideas <span>that solve business problems.</span></h1>
+  <p class="cta"><a class="cbtn mail" href="mailto:davidvshih@gmail.com"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6.5h18v11H3z M3 7l9 6.5L21 7" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg><span>Email me</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a><a class="cbtn li" href="https://www.linkedin.com/in/david-shih-creative/"><span class="in" aria-hidden="true">in</span><span>LinkedIn</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></p>
+  <div class="cols">
+    <div class="summary">
+      <p>Over the course of his career, David has led creative work for brands including Samsung, Jeep, Sony, Chrysler, Jim Beam, and Sprint, spanning digital, traditional, and integrated platforms. His work has been recognized by Cannes, the Effies, Communication Arts, the Clios, the London International Advertising Awards, and the Kelly Awards.</p>
+      <p>His approach blends strategy, data, and human insight to create ideas that work seamlessly across channels. That philosophy has helped deliver results at scale, including a digital out-of-home campaign for the Samsung Galaxy S3, part of the largest launch in Samsung’s history. The work earned an Effie and was featured in The New York Times, Wired, Mashable, and Contagious.</p>
+      <p>His career includes creative leadership roles at Second Nature, DDB Chicago, Epsilon, Razorfish, and Bagby &amp; Company, along with experience across networks such as Goodby, Digitas, BBDO Detroit, Hal Riney Chicago, WPP, Leo Burnett, Team Detroit, Havas, and FCB. Today, he brings that agency foundation to in-house and advisory roles, partnering with leadership teams to turn strategy into creative that drives clarity, differentiation, and growth.</p>
+    </div>
+    <div class="facts">
+      <h2>Work history</h2>
+      <ol class="jobs">
+        <li><span class="yr">2026 to present</span><span class="co">Paladin House</span><span class="ro">Founder. Pocket Agency, AdLand Gigs</span></li>
+        <li><span class="yr">2020 to 2026</span><span class="co">Second Nature</span><span class="ro">Executive Creative Director</span></li>
+        <li><span class="yr">2014 to 2019</span><span class="co">Epsilon Chicago</span><span class="ro">VP, Executive Creative Director. Content Group</span></li>
+        <li><span class="yr">2012 to 2014</span><span class="co">Digitas Chicago</span><span class="ro">Associate Creative Director, Sprint. Creative Director, TransUnion</span></li>
+        <li><span class="yr">2011 to 2012</span><span class="co">Razorfish</span><span class="ro">Creative Director. Samsung</span></li>
+        <li><span class="yr">2010 to 2011</span><span class="co">Freelance</span><span class="ro">Creative Director. Blackberry, Kraft, Chevy, Herman Miller Healthcare, DePaul, Jim Beam</span></li>
+        <li><span class="yr">2007 to 2010</span><span class="co">DDB Chicago</span><span class="ro">Creative Director. State Farm, Sea World, H&amp;R Block</span></li>
+        <li><span class="yr">2005 to 2006</span><span class="co">Bagby &amp; Company</span><span class="ro">Creative Director. Sony, International Truck and Engine</span></li>
+        <li><span class="yr">1998 to 2004</span><span class="co">BBDO Detroit</span><span class="ro">Associate Creative Director. Jeep, Chrysler, Coleman</span></li>
+      </ol>
+      <h2>Education</h2>
+      <p class="plain">University of Texas. BS in Communication, Advertising.</p>
+      <h2>Awards</h2>
+      <p class="plain">London International Advertising Awards, Cannes, Bronze Effie, Communication Arts, Clios, Gold and Silver Caddies, AAF Silver Addy, and the Kelly Awards.</p>
+    </div>
+  </div>
+</section>
+</div>
+{{CASES}}
+<script>
+(function(){
+  var stage=document.getElementById('stage'), pic=document.getElementById('david'); if(!stage||!pic) return;
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var D=Math.PI/180, F=1400;
+  var cards=[].slice.call(document.querySelectorAll('.orb')).map(function(el,i){
+    var c={el:el,th:+el.dataset.th*D,r:+el.dataset.r,y:+el.dataset.y,w:+el.dataset.w,
+      t:i*7.3,held:false,hf:1,yaw:0,pitch:0,fx:+el.dataset.fx||0,fy:+el.dataset.fy||0,
+      sa:(3+i%3*1.5)*D, sw:.16+(i%4)*.035, ba:9+(i%3)*4, bw:.21+(i%5)*.03, ph:i*1.9};
+    function hold(){c.held=true; if(reduce){place(0);}} function free(){c.held=false; if(reduce){c.hf=1;place(0);}}
+    el.addEventListener('pointerenter',hold); el.addEventListener('pointerleave',free);
+    el.addEventListener('focusin',hold); el.addEventListener('focusout',free);
+    return c;
+  });
+  var W=0,H=0,k=1,kx=1,cx=0,cy=0,shift=0,ys=1,g=1;
+  function measure(){
+    W=stage.clientWidth; H=stage.clientHeight;
+    var s=stage.getBoundingClientRect(), r=pic.getBoundingClientRect();
+    k=Math.max(.6,Math.min(1.15,H/860));
+    if(W<=700){ g=k; cx=W/2; kx=(W/2-58)/500; shift=-96*D; var bar=stage.querySelector('.bar'), top=(bar?bar.offsetHeight:90)+30, bot=(r.top-s.top)+r.height*.1; if(bot<top+120) bot=top+120; cy=(top+bot)/2; ys=Math.max(.2,Math.min(.5,(bot-top)/2/(300*g))); }
+    else { cards.forEach(function(c){ if(c.el.dataset.pin==='mid'){ c.fx=(350+(r.left-s.left)+r.width*.64)/2; c.fy=Math.max(140,(60+(r.top-s.top))/2+4); } }); g=r.height/757; cx=(r.left-s.left)+r.width*.62; cy=(r.top-s.top)+r.height*.34; kx=Math.max(.5,Math.min(1.25*g,(W>900?(W*.6-cx-70):(W-cx-90))/470)); shift=0; ys=1; }
+  }
+  measure(); window.addEventListener('resize',measure); pic.addEventListener('load',measure);
+  var yawT=0,pitchT=0,yaw=0,pitch=0,clock=0,last=null;
+  stage.addEventListener('pointermove',function(e){
+    if(e.pointerType==='touch'||reduce) return;
+    if(cards.some(function(c){return c.held;})) return;
+    var r=stage.getBoundingClientRect();
+    yawT=((e.clientX-r.left)/r.width-.5)*-16*D;
+    pitchT=((e.clientY-r.top)/r.height-.5)*.3;
+  });
+  stage.addEventListener('pointerleave',function(){yawT=0;pitchT=0;});
+  function place(dt){
+    clock+=dt; yaw+=(yawT-yaw)*Math.min(1,dt*3.2); pitch+=(pitchT-pitch)*Math.min(1,dt*3.2);
+    var auto=reduce?0:Math.sin(clock*.11)*3*D;
+    cards.forEach(function(c){
+      if(!c.held){c.t+=dt;c.yaw=yaw+auto;c.pitch=pitch;}
+      var th=c.th+shift+c.yaw+(reduce?0:c.sa*Math.sin(c.t*c.sw+c.ph));
+      var x=c.r*Math.sin(th), z=c.r*Math.cos(th);
+      var y=(c.y+(reduce?0:c.ba*Math.sin(c.t*c.bw+c.ph*1.7)))*ys-z*c.pitch;
+      var p=F/(F-z);
+      var hov=Math.max(1.35,236*k/(c.w*k*.68*p)); if(!reduce) c.hf+=((c.held?hov:1)-c.hf)*Math.min(1,dt*11); else if(c.held) c.hf=hov;
+      var sx=cx+x*p*(x>=0||shift?kx:g), sy=cy+y*p*g, w=c.w*k*.68*p*c.hf;
+      if(c.fx&&!shift){ sx=c.fx+x*p*.04+c.yaw/D*1.5; sy=c.fy+(reduce?0:c.ba*.6*Math.sin(c.t*c.bw+c.ph*1.7))-c.pitch*40; }
+      var tilt=Math.asin(Math.sin(th))/D*-.4;
+      var far=Math.max(0,-z/c.r);
+      c.el.style.width=w.toFixed(1)+'px';
+      c.el.style.fontSize=(w*.06).toFixed(2)+'px';
+      c.el.style.transform='translate('+sx.toFixed(1)+'px,'+sy.toFixed(1)+'px) translate(-50%,-50%) perspective(700px) rotateY('+tilt.toFixed(1)+'deg)';
+      c.el.style.zIndex=c.held?50:(z>0?10+Math.round(z/10):Math.max(1,4+Math.round(z/120)));
+      c.el.style.opacity=c.held?'1':(1-far*.12).toFixed(2);
+    });
+  }
+  place(0);
+  if(reduce){ window.addEventListener('resize',function(){place(0);}); return; }
+  function frame(now){ if(last===null) last=now; var dt=Math.min(.05,(now-last)/1000); last=now; place(dt); requestAnimationFrame(frame); }
+  requestAnimationFrame(frame);
+})();
+</script>
+<script>
+(function(){
+  var all=[].slice.call(document.querySelectorAll('.view'));
+  function show(){
+    var h=(location.hash||'').replace('#','');
+    var target=document.getElementById('v-'+h);
+    var name=target?h:'home';
+    all.forEach(function(v){ v.hidden=(v.id!=='v-'+name); });
+    if(name==='home'){
+      window.dispatchEvent(new Event('resize'));
+      if(h==='work'){ var w=document.getElementById('work'); if(w) w.scrollIntoView(); } else window.scrollTo(0,0);
+    } else window.scrollTo(0,0);
+  }
+  window.addEventListener('hashchange',show); show();
+})();
+</script>
+</body>
+</html>
