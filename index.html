@@ -147,6 +147,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
 .gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,2vw,26px);margin-top:clamp(38px,5vw,66px);align-items:start}
 .gallery.three{grid-template-columns:repeat(3,minmax(0,1fr))}
 .gallery.one{grid-template-columns:minmax(0,760px)}
+.gallery video{display:block;width:100%;height:auto;border:2px solid var(--frame,var(--ink))}
 .gallery img{display:block;width:100%;height:auto;border:2px solid var(--frame,var(--ink))}
 .gallery img.wide{grid-column:1 / -1}
 .pager{display:flex;justify-content:space-between;gap:16px;margin-top:clamp(44px,6vw,84px);padding-top:22px;border-top:2px solid var(--frame,var(--ink))}
@@ -399,7 +400,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
   <h1 class="headline flow">Second Nature. <span>Leading brand and creative at a PE-backed company.</span></h1>
   <div class="hero-media"><img src="img/sn-4.jpg" alt="Second Nature" loading="lazy"></div>
   <div class="cols"><div class="body"><p>Second Nature is a private-equity-backed property technology company serving property managers across the country.</p><p>As Executive Creative Director, I owned the brand and everything the company said in public, through a period when it grew from a set of products into a platform.</p><h3>Repositioning the company</h3><p>I worked with the founder and the C-suite to reposition Second Nature from a product suite to a single platform. That meant one brand narrative and one visual system, built so every team could use them without rewriting them.</p><p>It also meant changing how the company sold. We moved from sales-led messaging to messaging built on the product and its value to property managers and owners.</p><h3>Building the studio</h3><p>I built and led the in-house agency and production studio: designers, writers, illustrators, videographers, motion artists, and photographers. It carried the company’s campaigns from concept through production, and managed outside agencies where they were the better choice.</p><p>I put in the intake and prioritization systems that let a small team handle a high volume of work without losing speed or accountability.</p><h3>Working with leadership</h3><p>I was a senior communications partner to the VP and C-suite team. That covered corporate messaging and executive presentations, plus the sales materials that turned strategy into something a customer would believe.</p><p>As the organization changed and products were added, my job was to keep the brand consistent while the company moved around it.</p><h3>Staying close to the work</h3><p>I stayed hands-on in concepting and art direction throughout. Camelot, the film on this page, came out of that studio.</p><p>The company’s promise is a triple win for residents, property managers, and owners. The brand had to make that promise clear to all three.</p></div><aside class="meta"><dl><dt>Role</dt><dd>Executive Creative Director</dd><dt>Tenure</dt><dd>March 2020 to January 2026</dd><dt>Company</dt><dd>PE-backed property technology, Raleigh</dd><dt>Worked with</dt><dd>Founder and C-suite</dd><dt>Led</dt><dd>In-house agency and production studio</dd></dl><div class="films"><a class="cbtn li" href="https://vimeo.com/693107508"><span>Watch Camelot</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></aside></div>
-  <div class="gallery "><img src="img/sn-loop.webp" alt="Second Nature, image 1" loading="lazy"><img src="img/sn-1.jpg" alt="Second Nature, image 2" loading="lazy"><img src="img/sn-2.jpg" alt="Second Nature, image 3" loading="lazy"><img src="img/sn-3.jpg" alt="Second Nature, image 4" loading="lazy"></div>
+  <div class="gallery "><video src="img/sn-loop.mp4" poster="img/sn-loop-poster.jpg" loop muted playsinline preload="none" aria-label="Second Nature, film 1"></video><img src="img/sn-1.jpg" alt="Second Nature, image 2" loading="lazy"><img src="img/sn-2.jpg" alt="Second Nature, image 3" loading="lazy"><img src="img/sn-3.jpg" alt="Second Nature, image 4" loading="lazy"></div>
   <nav class="pager" aria-label="More work"><a href="#jeep"><small>Previous</small>Jeep</a><a class="nx" href="#state-farm"><small>Next</small>State Farm</a></nav>
 </article>
 </div>
@@ -445,7 +446,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
   <a class="back" href="#work">← All work</a>
   <p class="kicker">Brand · Anthem film</p>
   <h1 class="headline flow">Carnegie Mellon: Tepper School. <span>A brand vision for the business school.</span></h1>
-  <div class="hero-media"><img src="img/tepper-loop.webp" alt="Carnegie Mellon: Tepper School" loading="lazy"></div>
+  <div class="hero-media"><video src="img/tepper-loop.mp4" poster="img/tepper-loop-poster.jpg" loop muted playsinline preload="none" aria-label="Carnegie Mellon: Tepper School"></video></div>
   <div class="cols"><div class="body"><p>The Tepper School of Business at Carnegie Mellon wanted to update their image.</p><p>They asked us to create a modern, exciting vision of what their brand could mean for a next generation of leaders. This is what we delivered.</p></div><aside class="meta"><dl><dt>Client</dt><dd>Tepper School of Business, Carnegie Mellon University</dd></dl><div class="films"><a class="cbtn li" href="https://vimeo.com/601354341"><span>Watch the film</span><svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div></aside></div>
   
   <nav class="pager" aria-label="More work"><a href="#pocket-agency"><small>Previous</small>Pocket Agency</a><a class="nx" href="#filter-easy"><small>Next</small>Filter Easy</a></nav>
@@ -748,7 +749,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
     var target=document.getElementById('v-'+h);
     var name=target?h:'home';
     all.forEach(function(v){ v.hidden=(v.id!=='v-'+name); });
-    [].forEach.call(document.querySelectorAll('.hero-media video'),function(v){ if(v.closest('.view').hidden) v.pause(); else { v.muted=true; var p=v.play(); if(p&&p.catch) p.catch(function(){}); } });
+    [].forEach.call(document.querySelectorAll('.hero-media video, .gallery video'),function(v){ if(v.closest('.view').hidden) v.pause(); else { v.muted=true; var p=v.play(); if(p&&p.catch) p.catch(function(){}); } });
     /* film heroes: build the Vimeo player when its page opens, remove it when the page closes so nothing plays in the background */
     [].forEach.call(document.querySelectorAll('[data-vimeo]'),function(el){
       var open=!el.closest('.view').hidden;

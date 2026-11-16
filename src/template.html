@@ -147,6 +147,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
 .gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(14px,2vw,26px);margin-top:clamp(38px,5vw,66px);align-items:start}
 .gallery.three{grid-template-columns:repeat(3,minmax(0,1fr))}
 .gallery.one{grid-template-columns:minmax(0,760px)}
+.gallery video{display:block;width:100%;height:auto;border:2px solid var(--frame,var(--ink))}
 .gallery img{display:block;width:100%;height:auto;border:2px solid var(--frame,var(--ink))}
 .gallery img.wide{grid-column:1 / -1}
 .pager{display:flex;justify-content:space-between;gap:16px;margin-top:clamp(44px,6vw,84px);padding-top:22px;border-top:2px solid var(--frame,var(--ink))}
@@ -442,7 +443,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
     var target=document.getElementById('v-'+h);
     var name=target?h:'home';
     all.forEach(function(v){ v.hidden=(v.id!=='v-'+name); });
-    [].forEach.call(document.querySelectorAll('.hero-media video'),function(v){ if(v.closest('.view').hidden) v.pause(); else { v.muted=true; var p=v.play(); if(p&&p.catch) p.catch(function(){}); } });
+    [].forEach.call(document.querySelectorAll('.hero-media video, .gallery video'),function(v){ if(v.closest('.view').hidden) v.pause(); else { v.muted=true; var p=v.play(); if(p&&p.catch) p.catch(function(){}); } });
     /* film heroes: build the Vimeo player when its page opens, remove it when the page closes so nothing plays in the background */
     [].forEach.call(document.querySelectorAll('[data-vimeo]'),function(el){
       var open=!el.closest('.view').hidden;

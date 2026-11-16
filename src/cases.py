@@ -24,7 +24,7 @@ CASES=[
         '## Staying close to the work',
         'I stayed hands-on in concepting and art direction throughout. Camelot, the film on this page, came out of that studio.',
         'The company’s promise is a triple win for residents, property managers, and owners. The brand had to make that promise clear to all three.'],
-  meta=[('Role','Executive Creative Director'),('Tenure','March 2020 to January 2026'),('Company','PE-backed property technology, Raleigh'),('Worked with','Founder and C-suite'),('Led','In-house agency and production studio')],films=[('Watch Camelot',V+'693107508')],gallery=['sn-loop.webp','sn-1.jpg','sn-2.jpg','sn-3.jpg'],gclass=''),
+  meta=[('Role','Executive Creative Director'),('Tenure','March 2020 to January 2026'),('Company','PE-backed property technology, Raleigh'),('Worked with','Founder and C-suite'),('Led','In-house agency and production studio')],films=[('Watch Camelot',V+'693107508')],gallery=['sn-loop.mp4','sn-1.jpg','sn-2.jpg','sn-3.jpg'],gclass=''),
  dict(slug='state-farm',key='statefarm',name='State Farm',line='NFL sponsorship work for DDB.',tag='Campaign · Sponsorship',hero='sf-1.jpg',
   body=['State Farm is a major sponsor of the NFL. Why? Because football is awesome.'],
   meta=[('Role','Creative Director'),('Agency','DDB'),('Credits','Alex Zamiar, Art Director. Jonathan Richman, Copywriter. John Siebert, GCD. Liat Ebersohl, Producer.')],films=[('Watch film one',V+'85062379'),('Watch film two',V+'85062233')],gallery=['sf-loop.webp'],gclass='one'),
@@ -47,7 +47,7 @@ CASES=[
         'The job turns out to be the same one. Set the bar, and say no to the work that isn’t there yet.',
         'Pocket Agency started as a question about who gets good advertising. It became a product. It is live and still getting better.'],
   meta=[('Role','Founder'),('Company','Paladin House'),('Built with','Claude, ChatGPT'),('Stack','GitHub, Railway, PostgreSQL')],films=[],gallery=[],gclass='',side='pocket-1.jpg',link=('Visit thepocketagency.com','https://www.thepocketagency.com/')),
- dict(slug='tepper',key='tepper',name='Carnegie Mellon: Tepper School',line='A brand vision for the business school.',tag='Brand · Anthem film',hero='tepper-loop.webp',
+ dict(slug='tepper',key='tepper',name='Carnegie Mellon: Tepper School',line='A brand vision for the business school.',tag='Brand · Anthem film',hero='tepper-loop.mp4',
   body=['The Tepper School of Business at Carnegie Mellon wanted to update their image.','They asked us to create a modern, exciting vision of what their brand could mean for a next generation of leaders. This is what we delivered.'],
   meta=[('Client','Tepper School of Business, Carnegie Mellon University')],films=[('Watch the film',V+'601354341')],gallery=[],gclass=''),
  dict(slug='filter-easy',key='filtereasy',name='Filter Easy',line='Can air and fridge filters be sexy? We asked, why not?',tag='Brand · Identity',hero='fe-loop.mp4',
@@ -111,7 +111,7 @@ def case_html(c,i,bar):
     if c.get('link'): films+=f'<a class="cbtn mail" href="{c["link"][1]}"><span>{c["link"][0]}</span>{ARROW}</a>'
     films=f'<div class="films">{films}</div>' if films else ''
     side=f'<div class="side-media"><img src="img/{c["side"]}" alt="{c["name"]}" loading="lazy"></div>' if c.get('side') else ''
-    gal=''.join(f'<img{" class=\"wide\"" if g.startswith("*") else ""} src="img/{g.lstrip("*")}" alt="{c["name"]}, image {n+1}" loading="lazy">' for n,g in enumerate(c['gallery']))  # a leading * makes an image span the full row
+    gal=''.join((f'<video src="img/{g.lstrip("*")}" poster="img/{g.lstrip("*")[:-4]}-poster.jpg" loop muted playsinline preload="none" aria-label="{c["name"]}, film {n+1}"></video>' if g.endswith('.mp4') else f'<img{" class=\"wide\"" if g.startswith("*") else ""} src="img/{g.lstrip("*")}" alt="{c["name"]}, image {n+1}" loading="lazy">') for n,g in enumerate(c['gallery']))  # a leading * makes an image span the full row
     gal=f'<div class="gallery {c["gclass"]}">{gal}</div>' if gal else ''
     return f'''<div id="v-{c["slug"]}" class="view sub" hidden>
 {bar}
