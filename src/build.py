@@ -1,5 +1,5 @@
 from cases import CASES, case_html, SLUG
-BAR='''<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Executive Creative Director turning business problems into ideas, brands, and teams.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a><a href="#contact">Contact</a></nav></header>'''
+BAR='''<header class="bar static"><span class="who"><a class="me" href="#home">David Shih</a><span class="tag">Executive Creative Director solving business problems with ideas and elbow grease.</span></span><nav aria-label="Primary"><a href="#work">Work</a><a href="#about">About</a><a href="#resume">Resume</a><a href="#contact">Contact</a></nav></header>'''
 import os, shutil
 HERE=os.path.dirname(os.path.abspath(__file__))
 OUT=os.path.dirname(HERE)            # repo root, which GitHub Pages serves
