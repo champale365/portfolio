@@ -5,7 +5,7 @@ CASES=[
   body=['When Samsung launched their flagship phone, the Galaxy S III, they asked us to create a Times Square event that had never been done before—based on the sharing capabilities of the phone. So we asked ourselves, what do people always do in Times Square? They take pictures.',
         'And then, we took it to extremes.',
         'Four days in Times Square later and with over 1,200 folks sharing their best moves to the giant Samsung screen—it was part of Samsung’s biggest mobile phone launch ever.'],
-  meta=[('Role','Creative Director'),('Agency','Razorfish')],films=[('Watch the film',V+'47114738')],gallery=['samsung-2.jpg','samsung-3.jpg'],gclass=''),
+  meta=[('Role','Creative Director'),('Agency','Razorfish')],films=[('Watch the film',V+'47114738')],gallery=['samsung-2.jpg','samsung-3.jpg','samsung-4.jpg','samsung-5.jpg','samsung-6.jpg','samsung-7.jpg'],gclass=''),
  dict(slug='jeep',key='jeep',name='Jeep',line='Mars Rover, and a few years of very good cars.',tag='Film · Print',hero='jeep-1.jpg',film=('318806313',540,360,'Mars Rover, the Jeep commercial'),
   body=['I’m a car buff. I was lucky enough to work on Jeep for a few years at BBDO Detroit. Jeep was and still is one of the best car brands ever. We had the pleasure of shooting a few spots with Michael Bay. He gave us some of the footage from Armageddon and even flipped an 18-wheeler for us. Good times.'],
   meta=[('Role','Associate Creative Director'),('Agency','BBDO Detroit')],films=[('Watch Mars Rover with sound',V+'318806313'),('Watch Murphy’s Law',V+'319094465')],gallery=['jeep-1.jpg','jeep-2.jpg','jeep-3.jpg','jeep-4.jpg','jeep-5.jpg'],gclass=''),
