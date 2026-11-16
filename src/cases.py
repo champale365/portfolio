@@ -6,9 +6,9 @@ CASES=[
         'And then, we took it to extremes.',
         'Four days in Times Square later and with over 1,200 folks sharing their best moves to the giant Samsung screen—it was part of Samsung’s biggest mobile phone launch ever.'],
   meta=[('Role','Creative Director'),('Agency','Razorfish')],films=[('Watch the film',V+'47114738')],gallery=['samsung-2.jpg','samsung-3.jpg'],gclass=''),
- dict(slug='jeep',key='jeep',name='Jeep',line='Mars Rover, and a few years of very good cars.',tag='Film · Print',hero='jeep-1.jpg',
+ dict(slug='jeep',key='jeep',name='Jeep',line='Mars Rover, and a few years of very good cars.',tag='Film · Print',hero='jeep-1.jpg',film=('318806313',540,360,'Mars Rover, the Jeep commercial'),
   body=['I’m a car buff. I was lucky enough to work on Jeep for a few years at BBDO Detroit. Jeep was and still is one of the best car brands ever. We had the pleasure of shooting a few spots with Michael Bay. He gave us some of the footage from Armageddon and even flipped an 18-wheeler for us. Good times.'],
-  meta=[('Role','Associate Creative Director'),('Agency','BBDO Detroit')],films=[('Watch film one',V+'318806313'),('Watch film two',V+'319094465')],gallery=['jeep-loop.webp','jeep-2.jpg','jeep-3.jpg','jeep-4.jpg','jeep-5.jpg'],gclass=''),
+  meta=[('Role','Associate Creative Director'),('Agency','BBDO Detroit')],films=[('Watch Mars Rover with sound',V+'318806313'),('Watch Murphy’s Law',V+'319094465')],gallery=['jeep-1.jpg','jeep-2.jpg','jeep-3.jpg','jeep-4.jpg','jeep-5.jpg'],gclass=''),
  dict(slug='second-nature',key='camelot',name='Second Nature',line='Leading brand and creative at a PE-backed company.',tag='Executive leadership · In-house',hero='sn-4.jpg',
   body=['Second Nature is a private-equity-backed property technology company serving property managers across the country.',
         'As Executive Creative Director, I owned the brand and everything the company said in public, through a period when it grew from a set of products into a platform.',
@@ -100,6 +100,9 @@ ARROW='<svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 
 def case_html(c,i,bar):
     prev=CASES[(i-1)%len(CASES)]; nxt=CASES[(i+1)%len(CASES)]
     hero=f'<div class="hero-media"><img src="img/{c["hero"]}" alt="{c["name"]}" loading="lazy"></div>' if c.get('hero') else ''
+    if c.get('film'):   # (vimeo id, width, height, label): the film plays muted on a loop as the hero. The player is only created while the page is open.
+        vid,vw,vh,lab=c['film']
+        hero=f'<div class="hero-media film" style="aspect-ratio:{vw}/{vh};max-width:{round(vw*1.6)}px" data-vimeo="{vid}" data-label="{lab}"></div>'
     body=''.join((f'<h3>{p[3:]}</h3>' if p.startswith('## ') else f'<p>{p}</p>') for p in c['body'])
     meta=''.join(f'<dt>{k}</dt><dd>{v}</dd>' for k,v in c['meta'])
     films=''.join(f'<a class="cbtn li" href="{u}"><span>{t}</span>{ARROW}</a>' for t,u in c['films'])
