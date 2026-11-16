@@ -50,7 +50,7 @@ CASES=[
  dict(slug='tepper',key='tepper',name='Carnegie Mellon: Tepper School',line='A brand vision for the business school.',tag='Brand · Anthem film',hero='tepper-loop.webp',
   body=['The Tepper School of Business at Carnegie Mellon wanted to update their image.','They asked us to create a modern, exciting vision of what their brand could mean for a next generation of leaders. This is what we delivered.'],
   meta=[('Client','Tepper School of Business, Carnegie Mellon University')],films=[('Watch the film',V+'601354341')],gallery=[],gclass=''),
- dict(slug='filter-easy',key='filtereasy',name='Filter Easy',line='Can air and fridge filters be sexy? We asked, why not?',tag='Brand · Identity',hero='fe-loop.webp',
+ dict(slug='filter-easy',key='filtereasy',name='Filter Easy',line='Can air and fridge filters be sexy? We asked, why not?',tag='Brand · Identity',hero='fe-loop.mp4',
   body=['After 8 years in the DTC market, it was time for a re-brand. I worked with our agency, WMH in Raleigh, to come up with a new logo and fun branding elements. From there, we designed all new packaging and shot custom photography. Then we built a fun website to better capture our youthful brand. After all, if you can’t have fun with air and fridge filters, you’re just doing it wrong.'],
   meta=[('Role','Executive Creative Director'),('Agency','WMH, Raleigh'),('Credits','Chloe Holzapfel, Filter Easy Design Director.')],films=[],gallery=['fe-magic.webp','fe-5.jpg','fe-1.jpg','fe-2.jpg','fe-3.jpg','fe-4.jpg'],gclass=''),
  dict(slug='cracker-barrel',key='crackerbarrel',name='Cracker Barrel',line='Campfire Meals, and the Worst Camper in the World.',tag='Campaign · Relaunch',hero='cb-1.jpg',
@@ -100,6 +100,8 @@ ARROW='<svg class="go" viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 
 def case_html(c,i,bar):
     prev=CASES[(i-1)%len(CASES)]; nxt=CASES[(i+1)%len(CASES)]
     hero=f'<div class="hero-media"><img src="img/{c["hero"]}" alt="{c["name"]}" loading="lazy"></div>' if c.get('hero') else ''
+    if c.get('hero','') and c['hero'].endswith('.mp4'):   # a silent looping clip of our own: starts when the page opens
+        hero=f'<div class="hero-media"><video src="img/{c["hero"]}" poster="img/{c["hero"][:-4]}-poster.jpg" loop muted playsinline preload="none" aria-label="{c["name"]}"></video></div>'
     if c.get('film'):   # (vimeo id, width, height, label): the film plays muted on a loop as the hero. The player is only created while the page is open.
         vid,vw,vh,lab=c['film']
         hero=f'<div class="hero-media film" style="aspect-ratio:{vw}/{vh};max-width:{round(vw*1.6)}px" data-vimeo="{vid}" data-label="{lab}"></div>'

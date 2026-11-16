@@ -132,6 +132,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
 .hero-media{margin:clamp(26px,4vw,46px) 0 0;line-height:0}
 .hero-media.film{position:relative;line-height:0;background:var(--ink);border:3px solid var(--frame,var(--ink));box-shadow:12px 12px 0 var(--frameshadow,var(--ink))}
 .hero-media.film iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.hero-media video{display:block;width:100%;height:auto;border:3px solid var(--frame,var(--ink));box-shadow:12px 12px 0 var(--frameshadow,var(--ink))}
 .hero-media img{display:block;width:100%;height:auto;border:3px solid var(--frame,var(--ink));box-shadow:12px 12px 0 var(--frameshadow,var(--ink))}
 .case .cols{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);gap:clamp(24px,5vw,72px);margin-top:clamp(38px,5vw,66px)}
 .case .body p{font-size:clamp(16px,1.35vw,19px);max-width:62ch}
@@ -456,7 +457,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
   <a class="back" href="#work">← All work</a>
   <p class="kicker">Brand · Identity</p>
   <h1 class="headline flow">Filter Easy. <span>Can air and fridge filters be sexy? We asked, why not?</span></h1>
-  <div class="hero-media"><img src="img/fe-loop.webp" alt="Filter Easy" loading="lazy"></div>
+  <div class="hero-media"><video src="img/fe-loop.mp4" poster="img/fe-loop-poster.jpg" loop muted playsinline preload="none" aria-label="Filter Easy"></video></div>
   <div class="cols"><div class="body"><p>After 8 years in the DTC market, it was time for a re-brand. I worked with our agency, WMH in Raleigh, to come up with a new logo and fun branding elements. From there, we designed all new packaging and shot custom photography. Then we built a fun website to better capture our youthful brand. After all, if you can’t have fun with air and fridge filters, you’re just doing it wrong.</p></div><aside class="meta"><dl><dt>Role</dt><dd>Executive Creative Director</dd><dt>Agency</dt><dd>WMH, Raleigh</dd><dt>Credits</dt><dd>Chloe Holzapfel, Filter Easy Design Director.</dd></dl></aside></div>
   <div class="gallery "><img src="img/fe-magic.webp" alt="Filter Easy, image 1" loading="lazy"><img src="img/fe-5.jpg" alt="Filter Easy, image 2" loading="lazy"><img src="img/fe-1.jpg" alt="Filter Easy, image 3" loading="lazy"><img src="img/fe-2.jpg" alt="Filter Easy, image 4" loading="lazy"><img src="img/fe-3.jpg" alt="Filter Easy, image 5" loading="lazy"><img src="img/fe-4.jpg" alt="Filter Easy, image 6" loading="lazy"></div>
   <nav class="pager" aria-label="More work"><a href="#tepper"><small>Previous</small>Carnegie Mellon: Tepper School</a><a class="nx" href="#cracker-barrel"><small>Next</small>Cracker Barrel</a></nav>
@@ -747,6 +748,7 @@ h2{font-weight:500;font-size:13px;letter-spacing:.06em;text-transform:uppercase;
     var target=document.getElementById('v-'+h);
     var name=target?h:'home';
     all.forEach(function(v){ v.hidden=(v.id!=='v-'+name); });
+    [].forEach.call(document.querySelectorAll('.hero-media video'),function(v){ if(v.closest('.view').hidden) v.pause(); else { v.muted=true; var p=v.play(); if(p&&p.catch) p.catch(function(){}); } });
     /* film heroes: build the Vimeo player when its page opens, remove it when the page closes so nothing plays in the background */
     [].forEach.call(document.querySelectorAll('[data-vimeo]'),function(el){
       var open=!el.closest('.view').hidden;
