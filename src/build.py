@@ -168,7 +168,7 @@ OLD={'about-1':'about','about':'about','brands-1':'work','resume':'resume','work
  'equal-rebrand':'equal','my-reel':'reel','coleman-kelly-finalist':'coleman','city-of-chicago-tech-plan':'chicago-tech-plan',
  'samsung-galaxy-facebook':'samsung-facebook','tepper-school-of-business':'tepper'}
 for c in CASES: OLD.setdefault(c['slug'],c['slug'])
-STUB='<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>David Shih</title><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url=/#{h}"><script>location.replace("/#{h}")</script></head><body><a href="/#{h}">Continue to the page</a></body></html>'
+STUB='<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><title>David Shih</title><link rel="icon" href="/favicon.ico" sizes="any"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0; url=/#{h}"><script>location.replace("/#{h}")</script></head><body><a href="/#{h}">Continue to the page</a></body></html>'
 for path,h in OLD.items():
     os.makedirs(os.path.join(OUT,path),exist_ok=True)
     open(os.path.join(OUT,path,'index.html'),'w').write(STUB.replace('{h}',h))
